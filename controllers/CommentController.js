@@ -9,7 +9,16 @@ module.exports = {
 					reject(err)
 					return
 				}
+				if(isRaw){
+
 				resolve(comments)
+				}else{
+					var list = []
+					comments.forEach(function(post,i){
+						list.push(post.summary())
+					})
+					resolve(list)
+				}
 			})
 		})
 
@@ -21,7 +30,12 @@ module.exports = {
 					reject(err)
 					return
 				}
+				if(isRaw){
+
 				resolve(comment)
+				}else{
+					resolve(comment.summary())
+				}
 
 			})
 		})
@@ -33,7 +47,12 @@ module.exports = {
 					reject(err)
 					return
 				}
+				if(isRaw){
+
 				resolve(comment)
+				}else{
+					resolve(comment.summary())
+				}
 			})
 		})
 	}
