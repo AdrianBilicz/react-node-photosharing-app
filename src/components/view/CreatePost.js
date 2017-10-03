@@ -67,12 +67,22 @@ class CreatePost extends Component{
 	}
 	render(){
 		return (
-			<div>Create Post
-			<Dropzone onDrop={this.imageSelected.bind(this)} style = {{border: 'none'}}>
-				<button className="btn btn-info">upload Image</button>
-			</Dropzone>
-			<input ref="caption" id="caption" onChange={this.updatePost.bind(this)} type="text" placeholder="caption"/>
-			<button className="btn btn-info" onClick={this.submitPost.bind(this)}>Submit</button>
+			<div>
+			<h2>Create Post</h2>
+			<input ref="caption" className="form-control" id="caption" onChange={this.updatePost.bind(this)} type="text" placeholder="caption"/>
+
+			<div className="btn-group mr-2" role="group" aria-label="Basic example">
+				<button type="button" onClick={this.submitPost.bind(this)} className="btn btn-info">
+					Submit
+				</button>
+			</div>
+			<div className="btn-group mr-2" role="group" aria-label="Basic example">
+				<button type="button" className="btn btn-info">
+					<Dropzone onDrop={this.imageSelected.bind(this)} style = {{border: 'none'}}>
+						Upload Image
+					</Dropzone>
+				</button>
+			</div>
 			</div>
 			)
 	}

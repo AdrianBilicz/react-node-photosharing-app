@@ -7,33 +7,10 @@ const notify = require('gulp-notify');
 const minifycss = require('gulp-minify-css');
 const concat = require('gulp-concat');
 const plumber = require('gulp-plumber');
-const browserSync = require('browser-sync').create();
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 
-
-// gulp.task('serve',function(){
-// 	browserSync.init({
-// 		server: {
-// 			baseDir: './dist'
-// 		}
-// 	})
-// })
-
-
-/* scripts task */
-gulp.task('scripts', function() {
-	return gulp.src([
-		'./public/javascripts/*.js'
-	])
-	.pipe(concat('all.js'))
-	.pipe(gulp.dest('dist/js'))
-	.pipe(rename({suffix: '.min'}))
-	.pipe(uglify())
-	.pipe(gulp.dest('dist/js'))
-	.pipe(browserSync.reload({stream:true}));
-});
 
 /* sass task */
 gulp.task('sass', function() {
@@ -46,7 +23,7 @@ gulp.task('sass', function() {
 			includePaths: ['sass']
 		}))
 		.pipe(postcss(processors))
-		.pipe(gulp.dest('dist/css'))
+		.pipe(gulp.dest('public/stylesheets'))
 });
 
 /* postcss/cssnano task */
@@ -55,29 +32,16 @@ gulp.task('css', function() {
         autoprefixer({browsers: ['last 4 versions']}),
         cssnano(),
     ];
-    return gulp.src('dist/css/styles.css')
+    return gulp.src('public/stylesheets/style.css')
         .pipe(postcss(processors))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('public/stylesheets'));
 });
 
-/* reload task */
-// gulp.task('bs-reload', function() {
-// 	browserSync.reload();
-// });
-
-gulp.task('images', function(){
-	gulp.src('./public/images/*')
-	.pipe(gulp.dest('dist/images'))
-	.pipe(browserSync.reload({stream:true}))
-})
-
 /* watch sass, js and html files, doing different things with each. */
-gulp.task('default', ['sass', 'css','images'], function() {
+gulp.task('default', ['sass', 'css'], function() {
 	/* watch sass, run the sass task on change. */
-	gulp.watch(['./public/stylesheets/sass/**/*.sass','./public/stylesheets/sass/*.sass'], ['sass', 'css']);
-	/* watch app.js file, run the scripts task on change. */
-	gulp.watch(['./public/javascripts/*.js'], ['scripts']);
-	/* watch .html files, run the bs-reload task on change. */
-	// gulp.watch(['./dist/css/*.css','./dist/*.html'],['bs-reload']);
+	gulp.watch(['./public/stylesheets/sass/*.sass'], ['sass']);
+    gulp.watch(['./public/stylesheets/style.css'], ['css']);
+
 });

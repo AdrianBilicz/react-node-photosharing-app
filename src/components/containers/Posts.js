@@ -32,8 +32,8 @@ class Posts extends Component{
 		}
 		const currentLocation = this.props.posts.currentLocation
 		post['geo'] = [
-			currentLocation.lat,
-			currentLocation.lng
+		currentLocation.lat,
+		currentLocation.lng
 		]
 		this.props.createPost(post)
 	}
@@ -43,14 +43,27 @@ class Posts extends Component{
 		return(
 			<div>
 			<CreatePost onCreate={this.submitPost.bind(this)}/>
-			<ol>
+			<div className="row">
 				{(list == null) ? null : list.map((post,i) => {
+					console.log(post)
 					return (
-						<li key={post.id}>{post.caption}</li>
+						<div className="col-md-4">
+							<div key={post.id} className="card">
+							<img className="card-img-top" src={post.image}alt="Card image cap"/>
+							<div className="card-body">
+							<h4 className="card-title">{post.caption}</h4>
+							</div>
+							<div className="card-footer">
+							<small className="text-muted">{post.profile.username}</small>
+							</div>
+							</div>
+
+						</div>
 						)
-				}) }
-			</ol>
-			</div>
+					}) 
+				}
+						</div>
+				</div>
 			)
 	}
 }

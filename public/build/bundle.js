@@ -27069,7 +27069,29 @@ var Home = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				_react2.default.createElement(_view.Sidebar, null)
+				_react2.default.createElement(_view.Sidebar, null),
+				_react2.default.createElement(
+					'div',
+					{ id: 'main' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'container' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-md-8 col-xs-12' },
+								_react2.default.createElement(_containers.Posts, null)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-md-4 col-xs-12' },
+								_react2.default.createElement(_containers.Account, null)
+							)
+						)
+					)
+				)
 			);
 		}
 	}]);
@@ -27194,13 +27216,36 @@ var Posts = function (_Component) {
 				null,
 				_react2.default.createElement(_view.CreatePost, { onCreate: this.submitPost.bind(this) }),
 				_react2.default.createElement(
-					'ol',
-					null,
+					'div',
+					{ className: 'row' },
 					list == null ? null : list.map(function (post, i) {
+						console.log(post);
 						return _react2.default.createElement(
-							'li',
-							{ key: post.id },
-							post.caption
+							'div',
+							{ className: 'col-md-4' },
+							_react2.default.createElement(
+								'div',
+								{ key: post.id, className: 'card' },
+								_react2.default.createElement('img', { className: 'card-img-top', src: post.image, alt: 'Card image cap' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'card-body' },
+									_react2.default.createElement(
+										'h4',
+										{ className: 'card-title' },
+										post.caption
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'card-footer' },
+									_react2.default.createElement(
+										'small',
+										{ className: 'text-muted' },
+										post.profile.username
+									)
+								)
+							)
 						);
 					})
 				)
@@ -36371,21 +36416,33 @@ var CreatePost = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				'Create Post',
 				_react2.default.createElement(
-					_reactDropzone2.default,
-					{ onDrop: this.imageSelected.bind(this), style: { border: 'none' } },
+					'h2',
+					null,
+					'Create Post'
+				),
+				_react2.default.createElement('input', { ref: 'caption', className: 'form-control', id: 'caption', onChange: this.updatePost.bind(this), type: 'text', placeholder: 'caption' }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'btn-group mr-2', role: 'group', 'aria-label': 'Basic example' },
 					_react2.default.createElement(
 						'button',
-						{ className: 'btn btn-info' },
-						'upload Image'
+						{ type: 'button', onClick: this.submitPost.bind(this), className: 'btn btn-info' },
+						'Submit'
 					)
 				),
-				_react2.default.createElement('input', { ref: 'caption', id: 'caption', onChange: this.updatePost.bind(this), type: 'text', placeholder: 'caption' }),
 				_react2.default.createElement(
-					'button',
-					{ className: 'btn btn-info', onClick: this.submitPost.bind(this) },
-					'Submit'
+					'div',
+					{ className: 'btn-group mr-2', role: 'group', 'aria-label': 'Basic example' },
+					_react2.default.createElement(
+						'button',
+						{ type: 'button', className: 'btn btn-info' },
+						_react2.default.createElement(
+							_reactDropzone2.default,
+							{ onDrop: this.imageSelected.bind(this), style: { border: 'none' } },
+							'Upload Image'
+						)
+					)
 				)
 			);
 		}
@@ -50832,7 +50889,7 @@ var MapNavigation = function (_Component) {
 				'div',
 				null,
 				_react2.default.createElement(_view.Map, {
-					containerElement: _react2.default.createElement('div', { style: { minHeight: '800px', height: '800px', width: '100%' } }),
+					containerElement: _react2.default.createElement('div', { style: { position: 'absolute', minHeight: '100%', height: '100%', width: '100%' } }),
 					mapElement: _react2.default.createElement('div', { style: { height: '100%', width: '100%' } }),
 					center: this.props.posts.currentLocation,
 					zoom: 14,
@@ -51172,6 +51229,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _containers = __webpack_require__(178);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51195,8 +51254,8 @@ var Sidebar = function (_Component) {
 
 			return _react2.default.createElement(
 				'div',
-				null,
-				'Sidebar'
+				{ id: 'sidebar' },
+				_react2.default.createElement(_containers.MapNavigation, null)
 			);
 		}
 	}]);

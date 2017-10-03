@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {MapNavigation} from '../containers'
 
 
 
@@ -9,7 +10,9 @@ class Sidebar extends Component {
 
 
 		return (
-			<div>Sidebar</div>
+			<div id="sidebar">
+				<MapNavigation/>
+			</div>
 			)
 	}
 }
