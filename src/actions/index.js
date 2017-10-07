@@ -76,10 +76,25 @@ export default {
 			APIManager
 			.get('/account/currentuser',null)
 			.then( response => {
-				console.log('CURRENT_USER_RECIEVED ' + JSON.stringify(response))
 				dispatch({
 					type: constants.CURRENT_USER_RECIEVED,
 					user: response.user
+				})
+			})
+			.catch( err => {
+				console.log('ERROR ' + err)
+
+			})
+
+		}
+	},
+	signOut(){
+		return (dispatch) => {
+			APIManager
+			.get('/account/logout',null)
+			.then( response => {
+				dispatch({
+					type: constants.USER_LOGOUT
 				})
 			})
 			.catch( err => {

@@ -14,10 +14,11 @@ class Home extends Component{
 				<div id="main">
 					<div className="container">
 						<div className="row">
-							<div className="col-md-8 col-xs-12"><Posts/></div>
-							<div className="col-md-4 col-xs-12"><Account/></div>
+							<div className="col-lg-12"><Posts/></div>
 						</div>
 					</div>
+					<Account/>
+
 
 				</div>
 			</div>

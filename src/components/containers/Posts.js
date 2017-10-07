@@ -10,7 +10,6 @@ class Posts extends Component{
 
 	componentDidMount(){
 		const currentLocation = this.props.posts.currentLocation
-		console.log(currentLocation)
 		this.props.fetchPosts(currentLocation)
 	}
 	componentDidUpdate(){
@@ -41,28 +40,31 @@ class Posts extends Component{
 		const list = this.props.posts.list
 
 		return(
-			<div>
+			<div >
 			<CreatePost onCreate={this.submitPost.bind(this)}/>
-			<div className="row">
-				{(list == null) ? null : list.map((post,i) => {
-					console.log(post)
-					return (
-						<div className="col-md-4">
-							<div key={post.id} className="card">
-							<img className="card-img-top" src={post.image}alt="Card image cap"/>
-							<div className="card-body">
-							<h4 className="card-title">{post.caption}</h4>
-							</div>
-							<div className="card-footer">
-							<small className="text-muted">{post.profile.username}</small>
-							</div>
-							</div>
+			<hr/>
+			<div className="photo-list">
+				<div className="row">
+					{(list == null) ? null : list.map((post,i) => {
+						return (
+							<div key={post.id} className="col-md-4">
+								<div  className="card card-custom">
+								<img className="card-img-top" src={post.image}alt="Card image cap"/>
+								<div className="card-body">
+								<h4 className="card-title">{post.caption}</h4>
+								</div>
+								<div className="footer">
+								<small>{post.profile.username}</small>
+								</div>
+								</div>
 
-						</div>
-						)
-					}) 
-				}
-						</div>
+							</div>
+							)
+						}) 
+					}
+				</div>
+
+			</div>
 				</div>
 			)
 	}

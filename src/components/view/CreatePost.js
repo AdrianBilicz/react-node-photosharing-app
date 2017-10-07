@@ -39,7 +39,7 @@ class CreatePost extends Component{
 		console.log('uploadFile: ')
 		const image = files[0]
 		const cloudName = 'dr4dag57n'
-		const url =' https://api.cloudinary.com/v1_1/cloudName/image/upload'
+		const url =`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
 
 		const timestamp = Date.now()/1000
 		const uploadPreset = 'zy8e1wkh'
@@ -68,23 +68,24 @@ class CreatePost extends Component{
 	render(){
 		return (
 			<div>
-			<h2>Create Post</h2>
-			<input ref="caption" className="form-control" id="caption" onChange={this.updatePost.bind(this)} type="text" placeholder="caption"/>
-
-			<div className="btn-group mr-2" role="group" aria-label="Basic example">
-				<button type="button" onClick={this.submitPost.bind(this)} className="btn btn-info">
-					Submit
-				</button>
-			</div>
-			<div className="btn-group mr-2" role="group" aria-label="Basic example">
-				<button type="button" className="btn btn-info">
+			<h2>Create <span className=" new badge badge-secondary">New</span> Post</h2>
+			
+			 <div className="col-lg-12">
+			    <div className="input-group">
+			      <input ref="caption" className="form-control" id="caption" onChange={this.updatePost.bind(this)} type="text" placeholder="caption"/>
+			      <span className="input-group-addon upload-image">
 					<Dropzone onDrop={this.imageSelected.bind(this)} style = {{border: 'none'}}>
 						Upload Image
 					</Dropzone>
-				</button>
-			</div>
+			      </span>
+			      <span onClick={this.submitPost.bind(this)} className="submit input-group-addon">
+						Submit
+			      </span>
+			    </div>
+			  </div>
 			</div>
 			)
 	}
 }
 export default CreatePost
+

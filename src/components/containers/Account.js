@@ -14,13 +14,15 @@ class Account extends Component {
 	login(credentials){
 		this.props.login(credentials)
 	}
+	signOut(){
+		this.props.signOut()
+	}
 	render(){
 		const currentUser = this.props.account ? this.props.account.username : null
 		console.log(currentUser)
 		return(
 			<div>
-				{ (currentUser) ? <h2>{currentUser}</h2> : <Register onRegister={this.register.bind(this)} onLogin={this.login.bind(this)}/> }
-				
+				<Register currentUser={currentUser} signOut={this.signOut.bind(this)} onRegister={this.register.bind(this)} onLogin={this.login.bind(this)}/>
 			</div>
 			)
 	}
@@ -34,7 +36,8 @@ const dispatchToProps = (dispatch) => {
 	return {
 		createUser: (registration) => dispatch(action.createUser(registration)),
 		login: (registration) => dispatch(action.login(registration)),
-		checkCurrentUser: () => dispatch(action.checkCurrentUser())
+		checkCurrentUser: () => dispatch(action.checkCurrentUser()),
+		signOut: () => dispatch(action.signOut())
 	}
 }
 
